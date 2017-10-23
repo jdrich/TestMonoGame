@@ -6,39 +6,52 @@ namespace TestMonoGame
 {
     public class TestGame : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+		protected bool UseFullScreen = false;
 
+		protected KeyUpListener keyUpListener;
+
+        protected GraphicsDeviceManager graphics;
+        
         public TestGame()
         {
             graphics = new GraphicsDeviceManager(this);
-
-            graphics.IsFullScreen = true;
-            
+                        
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
             base.Initialize();
+
+			keyUpListener = new KeyUpListener ();
+
+			SetupFullscreenToggleListener ();
+			SetupExitListener ();
+
         }
 
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-        }
+		protected void SetupFullscreenToggleListener() {
+			keyUpListener.Listen (Keys.F11, (key) => {
+				graphics.ToggleFullScreen();
+				graphics.ApplyChanges();
+			});
+		}
+
+		protected void SetupExitListener() {
+			keyUpListener.Listen (Keys.Escape, (key) => {
+				Exit();
+			});
+		}
 
         protected override void UnloadContent()
         {
         }
 
         protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == 
-                ButtonState.Pressed || Keyboard.GetState().IsKeyDown(
-                    Keys.Escape))
-                Exit();
+		{
             base.Update(gameTime);
+
+			keyUpListener.Update();
         }
 
         protected override void Draw(GameTime gameTime)
