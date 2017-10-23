@@ -35,6 +35,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="TestGame.cs" />
     <Compile Include="Input\KeyUpListener.cs" />
+    <Compile Include="Debug.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, PublicKeyToken=null">

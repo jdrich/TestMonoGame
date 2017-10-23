@@ -6,7 +6,7 @@ namespace TestMonoGame
 {
     public class TestGame : Game
     {
-		protected bool UseFullScreen = false;
+		protected Debug debug;
 
 		protected KeyUpListener keyUpListener;
 
@@ -19,6 +19,10 @@ namespace TestMonoGame
             Content.RootDirectory = "Content";
         }
 
+		protected void ToggleDebug() {
+			debug.Display = !debug.Display;
+		}
+
         protected override void Initialize()
         {
             base.Initialize();
@@ -28,6 +32,7 @@ namespace TestMonoGame
 			SetupFullscreenToggleListener ();
 			SetupExitListener ();
 
+			debug = new Debug ();
         }
 
 		protected void SetupFullscreenToggleListener() {
@@ -43,6 +48,12 @@ namespace TestMonoGame
 			});
 		}
 
+		protected void SetupDebugToggleListener() {
+			keyUpListener.Listen (Keys.F8, (key) => {
+				ToggleDebug();
+			});
+		}
+
         protected override void UnloadContent()
         {
         }
@@ -52,12 +63,15 @@ namespace TestMonoGame
             base.Update(gameTime);
 
 			keyUpListener.Update();
+			debug.Update (gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.DarkSlateGray);
             base.Draw(gameTime);
+
+			debug.Draw();
         }
     }
 }
