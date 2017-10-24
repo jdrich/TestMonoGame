@@ -58,6 +58,10 @@
     <Content Include="Content\bin\Debug.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Mouse.png" />
+    <Content Include="Content\bin\Mouse.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\TestMonoGame.mgcb" />
     <None Include="MonoGame.Framework.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

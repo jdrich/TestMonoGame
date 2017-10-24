@@ -236,6 +236,12 @@ namespace TestMonoGame
         {
             var x = Mouse.GetState().X;
             var y = Mouse.GetState().Y;
+            
+            SpriteBatch spriteBatch = new SpriteBatch(graphics.GraphicsDevice);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(Content.Load<Texture2D>("Mouse"), new Rectangle(x, y, 32, 32), Color.White);
+            spriteBatch.End();
         }
 
         protected void Draw3d(GameTime gametime)
